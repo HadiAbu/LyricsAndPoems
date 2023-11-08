@@ -27,7 +27,18 @@ const importData = async () => {
     process.exit(1);
   }
 };
-const destroyData = async () => {};
+const destroyData = async () => {
+  try {
+    await Author.deleteMany();
+    await Song.deleteMany();
+
+    console.log("Data Removed!");
+    process.exit();
+  } catch (error) {
+    console.error(`${error}`);
+    process.exit(1);
+  }
+};
 
 if (process.argv[2] === "-d") {
   destroyData();
