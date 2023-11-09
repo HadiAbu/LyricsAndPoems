@@ -9,7 +9,14 @@ connectDB();
 
 const app = express();
 
-app.use(cors());
+// cors
+const corsOptions = {
+  origin: "*",
+  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+  preflightContinue: false,
+  optionsSuccessStatus: 204,
+};
+app.use(cors(corsOptions));
 
 app.get("/", (req, res) => {
   res.send("hello form within server");
