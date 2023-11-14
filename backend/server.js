@@ -9,7 +9,7 @@ connectDB();
 
 const app = express();
 
-// cors
+// corsc
 const corsOptions = {
   origin: "*",
   methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
