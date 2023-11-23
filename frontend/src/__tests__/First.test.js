@@ -1,6 +1,6 @@
 /* eslint-disable no-undef */
 import React from "react";
-import { render, screen } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import App from "../App";
 
@@ -13,8 +13,12 @@ describe("first test here", () => {
     render(<App />);
     expect(5).toBe(5);
   });
-  test("find button and click it", () => {
-    userEvent.click(screen.findByRole("button", { name: /count is 0/i }));
-    screen.findByRole("button", { name: /count is 1/i });
+  test("find button and click it", async () => {
+    render(<App />);
+    let button = await screen.findByRole("button");
+    expect(button.textContent).toBe("count is 0");
+    fireEvent.click(button);
+    fireEvent.click(button);
+    expect(await screen.findByText("count is 2")).toBeDefined();
   });
 });

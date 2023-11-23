@@ -12,6 +12,7 @@ const App = () => {
         <button onClick={() => setCount((count) => count + 1)}>
           count is {count}
         </button>
+        <p>test</p>
         <p>
           Edit <code>src/App.tsx</code> and save to test HMR
         </p>
