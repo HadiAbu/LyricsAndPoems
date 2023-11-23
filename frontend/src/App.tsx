@@ -12,14 +12,9 @@ const App = () => {
         <button onClick={() => setCount((count) => count + 1)}>
           count is {count}
         </button>
-        <p>test</p>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
+        <input type="text" placeholder="talk dirty to me" />
+        <input type="checkbox" />
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
     </>
   );
 };
