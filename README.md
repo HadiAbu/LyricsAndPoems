@@ -68,3 +68,6 @@ Designing a lyrics app involves considering the user interface, features, and ov
 - Include a help or FAQ section for user support.
 
 link to figma file(this is still work in progress):
+
+https://www.figma.com/file/wKzQPTdsrqlJwSih7IWNlE/SongsAndLyrics?type=design&node-id=1%3A6&mode=design&t=PUI7jvZSti4FTk1G-1
+
