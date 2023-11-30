@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 import cors from "cors";
 import http from "http";
 import connectDB from "./db.js";
+import authorRoutes from "./routes/authorRoutes.js";
 
 dotenv.config();
 connectDB();
@@ -18,10 +19,18 @@ const corsOptions = {
   optionsSuccessStatus: 204,
 };
 app.use(cors(corsOptions));
+app.use("/api/authors/allAuthors", authorRoutes);
 
-app.get("/", (req, res) => {
+app.get("/", async (req, res) => {
   res.send("hello form within server");
-  console.log(typeof app);
+  try {
+    const response = await fetch("/api/authors/allAuthors");
+    console.log(await response.json());
+  } catch (e) {
+    console.log(e.message);
+  }
+
+  // console.log(typeof app);
 });
 
 const server = http.createServer(app);
