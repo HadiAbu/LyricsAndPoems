@@ -4,6 +4,8 @@ import cors from "cors";
 import http from "http";
 import connectDB from "./db.js";
 import authorRoutes from "./routes/authorRoutes.js";
+import Author from "./model/Author.js";
+import { getAllAuthors, fetchAuthors } from "./controllers/authorController.js";
 
 dotenv.config();
 connectDB();
@@ -19,15 +21,18 @@ const corsOptions = {
   optionsSuccessStatus: 204,
 };
 app.use(cors(corsOptions));
-app.use("/api/authors/allAuthors", authorRoutes);
-
+app.use("/api/authors", authorRoutes);
+//654bb1d9635d2f1efad35e7a
 app.get("/", async (req, res) => {
-  res.send("hello form within server");
+  // res.send("hello form within server");
   try {
-    const response = await fetch("/api/authors/allAuthors");
-    console.log(await response.json());
+    const authors = await getAllAuthors();
+    const authorNames = authors.map((auth) => auth.name);
+    console.log(authorNames);
+    res.status(200).send(authorNames);
   } catch (e) {
-    console.log(e.message);
+    console.log("error");
+    console.log(e);
   }
 
   // console.log(typeof app);
