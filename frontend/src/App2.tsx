@@ -9,10 +9,17 @@ const App2 = () => {
     const fetchAuthors = async () => {
       setLoading(true);
       try {
-        const response = await axios.get("/api/authors/all-authors");
+        const response = await axios.get("/api/authors");
         const { data } = response;
-        setAuthors(data);
-        console.log(data);
+        // setAuthors(data);
+        const adminId = data[0]._id;
+        console.log(adminId);
+        const putRes = await axios.put(`/api/authors/${adminId}`);
+        console.log(putRes);
+        const response2 = await axios.get("/api/authors");
+        const { data: data2 } = response2;
+        setAuthors(data2);
+        console.log(data2);
       } catch (e) {
         console.log(e.message);
       } finally {
@@ -43,7 +50,7 @@ const App2 = () => {
             {authors &&
               Array.isArray(authors) &&
               authors.map(
-                (auth) => auth && <li key={auth._id}>{auth?.name}</li>
+                (auth) => auth && <li key={auth?._id}>{auth?.name}</li>
               )}
           </ul>
         </div>

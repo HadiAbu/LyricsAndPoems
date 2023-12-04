@@ -22,7 +22,7 @@ const corsOptions = {
 };
 app.use(cors(corsOptions));
 app.use("/api/authors", authorRoutes);
-//654bb1d9635d2f1efad35e7a
+
 app.get("/", async (req, res) => {
   // res.send("hello form within server");
   try {
