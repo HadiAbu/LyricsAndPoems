@@ -8,6 +8,7 @@ import {
 const router = express.Router();
 
 router.route("/").get(fetchAuthors);
-router.route("/:id").get(getAuthorById).put(updateAuthor);
+router.route("/:id").get(getAuthorById);
+router.route("/:id").put(updateAuthor);
 
 export default router;

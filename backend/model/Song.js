@@ -20,4 +20,4 @@ const SongSchema = new Schema(
 const Song = mongoose.model("Song", SongSchema);
 
 export default Song;
-// export { SongSchema };
+export { SongSchema };

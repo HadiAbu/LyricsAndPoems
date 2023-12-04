@@ -11,15 +11,25 @@ const App2 = () => {
       try {
         const response = await axios.get("/api/authors");
         const { data } = response;
-        // setAuthors(data);
+        setAuthors(data);
         const adminId = data[0]._id;
         console.log(adminId);
-        const putRes = await axios.put(`/api/authors/${adminId}`);
-        console.log(putRes);
-        const response2 = await axios.get("/api/authors");
-        const { data: data2 } = response2;
-        setAuthors(data2);
-        console.log(data2);
+        await axios.put(
+          `/api/authors/${adminId}`,
+          {
+            name: "Admin User2",
+          },
+          {
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        );
+        // console.log(putRes);
+        // const response2 = await axios.get("/api/authors");
+        // const { data: data2 } = response2;
+        // setAuthors(data2);
+        // console.log(data2);
       } catch (e) {
         console.log(e.message);
       } finally {
