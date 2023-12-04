@@ -1,13 +1,14 @@
-import asyncHandler from "../middleware/asyncHandler";
-import Song from "../model/Song";
+import Song from "../model/Song.js";
+import asyncHandler from "../middleware/asyncHandler.js";
 
 //to be used as a API for the frontend
 const fetchSongs = asyncHandler(async (req, res) => {
   const songs = await Song.find({});
   if (songs) {
     res.json(songs);
+  } else {
+    res.status(404).send("Songs not found!");
   }
-  res.status(404).send("Songs not found!");
 });
 
 const getSongById = asyncHandler(async (req, res) => {
@@ -15,8 +16,9 @@ const getSongById = asyncHandler(async (req, res) => {
   const song = await Song.find({ _id: { $eq: id } });
   if (song) {
     res.json(song);
+  } else {
+    res.status(404).send("Song not found!");
   }
-  res.status(404).send("Song not found!");
 });
 
 const updateSong = asyncHandler(async (req, res) => {

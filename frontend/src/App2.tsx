@@ -4,32 +4,32 @@ import axios from "axios";
 
 const App2 = () => {
   const [authors, setAuthors] = useState([]);
+  const [songs, setSongs] = useState([]);
   const [loading, setLoading] = useState(false);
   useEffect(() => {
     const fetchAuthors = async () => {
       setLoading(true);
       try {
-        const response = await axios.get("/api/authors");
-        const { data } = response;
-        setAuthors(data);
-        const adminId = data[0]._id;
-        console.log(adminId);
-        await axios.put(
-          `/api/authors/${adminId}`,
-          {
-            name: "Admin User2",
-          },
-          {
-            headers: {
-              "Content-Type": "application/json",
-            },
-          }
-        );
-        // console.log(putRes);
-        // const response2 = await axios.get("/api/authors");
-        // const { data: data2 } = response2;
-        // setAuthors(data2);
-        // console.log(data2);
+        // fetch authors
+        const responseAuthors = await axios.get("/api/authors");
+        const { data: dataAuthors } = responseAuthors;
+        setAuthors(dataAuthors);
+
+        //fetch songs
+        const responseSongs = await axios.get("/api/songs");
+        const { data: dataSongs } = responseSongs;
+        setSongs(dataSongs);
+
+        //update the name of the Admin User
+        const adminId = dataAuthors[0]._id;
+        await axios.put(`/api/authors/${adminId}`, {
+          name: "Admin User Updated",
+        });
+
+        // refetch authors
+        const response2 = await axios.get("/api/authors");
+        const { data: dataAuthorsUpdated } = response2;
+        setAuthors(dataAuthorsUpdated);
       } catch (e) {
         console.log(e.message);
       } finally {
@@ -54,16 +54,29 @@ const App2 = () => {
       {loading ? (
         <Spinner />
       ) : (
-        <div style={{ color: "white" }}>
-          <h1>Author names: </h1>
-          <ul>
-            {authors &&
-              Array.isArray(authors) &&
-              authors.map(
-                (auth) => auth && <li key={auth?._id}>{auth?.name}</li>
-              )}
-          </ul>
-        </div>
+        <>
+          <div style={{ color: "white" }}>
+            <h1>Author names: </h1>
+            <ul>
+              {authors &&
+                Array.isArray(authors) &&
+                authors.map(
+                  (auth) => auth && <li key={auth?._id}>{auth?.name}</li>
+                )}
+            </ul>
+          </div>
+          <br />
+          <div style={{ color: "white" }}>
+            <h1>Song names: </h1>
+            <ol>
+              {songs &&
+                Array.isArray(songs) &&
+                songs.map(
+                  (song) => song && <li key={song?._id}>{song?.name}</li>
+                )}
+            </ol>
+          </div>
+        </>
       )}
     </>
   );

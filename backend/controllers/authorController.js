@@ -5,8 +5,9 @@ const fetchAuthors = asyncHandler(async (req, res) => {
   const authors = await Author.find({});
   if (authors) {
     res.json(authors);
+  } else {
+    res.status(404).send("Author not found!");
   }
-  res.status(404).send("Author not found!");
 });
 
 const getAuthorById = asyncHandler(async (req, res) => {
@@ -14,8 +15,9 @@ const getAuthorById = asyncHandler(async (req, res) => {
   const author = await Author.find({ _id: { $eq: id } });
   if (author) {
     res.json(author);
+  } else {
+    res.status(404).send("Author not found!");
   }
-  res.status(404).send("Author not found!");
 });
 
 const updateAuthor = asyncHandler(async (req, res) => {
