@@ -31,7 +31,7 @@ const App2 = () => {
         const { data: dataAuthorsUpdated } = response2;
         setAuthors(dataAuthorsUpdated);
       } catch (e) {
-        console.log(e.message);
+        console.log(e);
       } finally {
         setLoading(false);
       }
