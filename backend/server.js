@@ -37,8 +37,7 @@ app.get("/", async (req, res) => {
     console.log(authorNames);
     res.status(200).send(authorNames);
   } catch (e) {
-    console.log("error");
-    console.log(e);
+    console.log(e.message);
   }
 });
 
